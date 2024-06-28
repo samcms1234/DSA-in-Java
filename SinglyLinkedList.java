@@ -43,6 +43,39 @@ public class SinglyLinkedList {
         sn.display();
     }
 
+    // Add a node to the begining of the linkedList
+
+    public void addNodeToBegining(int value) {
+        ListNode ln = new ListNode(value);
+
+        ln.next = head;
+        head = ln;
+
+        display();
+    }
+
+    // Add a Node to the end of the linkedlist
+
+    public void addNodeAtEnd(int value) {
+        ListNode ln = new ListNode(value);
+
+        if(head == null) {
+            head = ln;
+            return;
+        }
+
+        ListNode current = head;
+
+        while(current.next != null) {
+            current = current.next;
+        }
+
+        current.next = ln;
+
+        display();
+
+    }
+
     public void addTwoNumbers(SinglyLinkedList s1, SinglyLinkedList s2) {
         
     }
@@ -90,10 +123,12 @@ public class SinglyLinkedList {
         second.next = third;
         third.next = fourth;
 
-        // sl.display();
+        sl.display();
+        sl.addNodeAtEnd(12);
+        sl.addNodeToBegining(1);
 
         // sl.reverse();
 
-        sl.oddEvenList();
+        // sl.oddEvenList();
     }
 }
