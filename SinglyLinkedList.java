@@ -76,6 +76,92 @@ public class SinglyLinkedList {
 
     }
 
+    // Add a node at any position in a linkedlist
+
+    public void addNumberAtPosN(int position, int value) {
+        ListNode ln = new ListNode(value);
+        if(position == 1) {
+            ln.next = head;
+            head = ln;
+        }
+        else {
+            ListNode previous = head;
+            int i = 1;
+
+            while(i < position - 1) {
+                previous = previous.next;
+                i++;
+            }
+
+            ListNode current = previous.next;
+            previous.next = ln;
+            ln.next = current;
+
+        }
+
+        display();
+    }
+
+    // Delete a node at the start
+
+    public ListNode deleteFirstNode() {
+        if(head == null) {
+            return null;
+        }
+
+        ListNode temp = head;
+        head = head.next;
+        temp.next = null;
+        return temp;
+    }
+
+    // Delete a node at the end of the linkedlist
+
+    public int removeLastElement() {
+        if(head == null || head.next == null) {
+            return head.val;
+        }
+        else {
+            ListNode current = head;
+            ListNode previous = null;
+
+            while(current.next != null) {
+                previous = current;
+                current = current.next;
+            }
+
+            previous.next = null;
+            return current.val;
+        }
+    }
+
+    // Delete all elements with a value
+
+    public void deleteAllElementsWithAValue(int value) {
+        if(head == null) {
+            System.out.println(head);
+        }
+        else {
+            ListNode current = head;
+            ListNode previous = null;
+
+            while(current != null) {
+
+                if(current.val == value) {
+                    ListNode ln = current;
+                    current = current.next;
+                    previous.next = ln.next;
+                    ln.next = null;
+                }
+                else {
+                    previous = previous.next;
+                    current = current.next;
+                }  
+                System.out.println(current.val);
+            } 
+        }
+    }
+
     public void addTwoNumbers(SinglyLinkedList s1, SinglyLinkedList s2) {
         
     }
@@ -123,12 +209,19 @@ public class SinglyLinkedList {
         second.next = third;
         third.next = fourth;
 
+        sl.addNumberAtPosN(4, 1);
+
         sl.display();
-        sl.addNodeAtEnd(12);
-        sl.addNodeToBegining(1);
+        // sl.addNodeAtEnd(12);
+        // sl.addNodeToBegining(1);
 
         // sl.reverse();
 
         // sl.oddEvenList();
+        // sl.addNumberAtPosN(3, 25);
+
+        // System.out.println(sl.deleteFirstNode().val);
+        // sl.deleteAllElementsWithAValue(1);
+        System.out.println(sl.removeLastElement());
     }
 }
