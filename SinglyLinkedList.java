@@ -166,6 +166,35 @@ public class SinglyLinkedList {
         
     }
 
+    public ListNode SelectionSort(ListNode head) {
+
+        if(head == null || head.next == null) {
+            return head;
+        }
+        
+        ListNode current = head;
+
+        while(current != null) {
+            ListNode i = current.next;
+            ListNode temp = current;
+
+            while(i != null) {
+                if(i.val < temp.val) {
+                    temp = i;
+                }
+                i = i.next;
+            }
+
+            if(temp != null && temp.val < current.val) {
+                int t = current.val;
+                current.val = temp.val;
+                temp.val = t;
+            }
+            current = current.next;
+        }
+        return head;
+    }
+
     public void oddEvenList() {
         SinglyLinkedList s1 = new SinglyLinkedList();
         SinglyLinkedList s2 = new SinglyLinkedList();
