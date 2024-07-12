@@ -135,6 +135,26 @@ public class SinglyLinkedList {
         }
     }
 
+    public void deleteNodeAtNPosition(int position) {
+        if(position == 1) {
+            head = head.next;
+        }
+        else {
+            ListNode previous = head;
+            int count = 1;
+
+            while(count < position-1) {
+                previous = previous.next;
+                count++;
+            }
+
+            ListNode current = previous.next;
+            previous.next = current.next;
+        }
+
+        display();
+    }
+
     // Delete all elements with a value
 
     public void deleteAllElementsWithAValue(int value) {
@@ -159,6 +179,56 @@ public class SinglyLinkedList {
                 }  
                 System.out.println(current.val);
             } 
+        }
+    }
+
+    // Add a Node to sorted Linkedl
+
+    public ListNode addNumber(ListNode ll) {
+        if(head == null) {
+            display();
+            return ll;
+        }
+        else if(head.val >= ll.val) {
+            ll.next = head;
+            head = ll;
+            display();
+            return head;
+        }
+        else {
+            ListNode current = head;
+            ListNode temp = null;
+
+            while(current != null && current.val < ll.val) {
+                temp = current;
+                current = current.next;
+            }
+
+            ll.next = current;
+            temp.next = ll;
+            display();
+            return head;
+        }
+    }
+
+    public ListNode removeduplicates() {
+        if(head == null || head.next == null) {
+            display();
+            return head;
+        }
+        else {
+            ListNode current = head;
+
+            while(current != null && current.next != null) {
+                if(current.val == current.next.val) {
+                    current.next = current.next.next;
+                }
+                else {
+                    current = current.next;
+                }
+            }
+            display();
+            return head;
         }
     }
 
@@ -238,8 +308,6 @@ public class SinglyLinkedList {
         second.next = third;
         third.next = fourth;
 
-        sl.addNumberAtPosN(4, 1);
-
         sl.display();
         // sl.addNodeAtEnd(12);
         // sl.addNodeToBegining(1);
@@ -251,6 +319,9 @@ public class SinglyLinkedList {
 
         // System.out.println(sl.deleteFirstNode().val);
         // sl.deleteAllElementsWithAValue(1);
-        System.out.println(sl.removeLastElement());
+        // sl.deleteNodeAtNPosition(4);
+        ListNode ll = new ListNode(4);
+        sl.addNumber(ll);
+        sl.removeduplicates();
     }
 }
