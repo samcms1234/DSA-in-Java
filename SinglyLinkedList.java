@@ -232,6 +232,148 @@ public class SinglyLinkedList {
         }
     }
 
+    // Search a number in a linkedList
+
+    public boolean findNumber(int num) {
+        if(head == null) {
+            return false;
+        }
+        else {
+            ListNode current = head;
+            while(current != null) {
+                if(current.val == num)
+                return true;
+                current = current.next;
+            }
+            return false;
+        }
+    }
+
+    public ListNode reverseLinked() {
+
+        if(head == null || head.next == null) {
+            return head;
+        }
+        
+        ListNode current = head;
+        ListNode previous = null;
+        ListNode next = null;
+
+        while(current != null) {
+            next = current.next;
+            current.next = previous;
+            previous = current;
+            current = next;
+        }
+
+        head = previous;
+        display();
+        return head;
+    }
+
+    // To find the middle node in a linkedlist
+
+    public int findMiddleNode() {
+
+        if(head == null) {
+            return -1;
+        }
+        ListNode slowPointer = head;
+        ListNode fastPointer = head;
+
+        while(fastPointer != null && fastPointer.next != null) {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next.next;
+        }
+
+        return slowPointer.val;
+    }
+
+    // find the nth last element in an Linkedl
+
+    public ListNode findNthLastNode(int n) {
+        if(head == null) {
+            return head;
+        }
+
+        ListNode refPointer = head;
+        ListNode mainPointer = head;
+
+        int counter = 0;
+
+        while(counter < n) {
+            if(refPointer == null) {
+                throw new IllegalArgumentException("The values of the n is more than the no of elements");
+            }
+
+            refPointer = refPointer.next;
+            counter++;
+        }
+
+        while(refPointer != null) {
+            refPointer = refPointer.next;
+            mainPointer = mainPointer.next;
+        }
+        mainPointer.next = null;
+        return mainPointer;
+    }
+
+    // find if a LinkedL contains a loop
+
+    public boolean containLoop() {
+        if(head == null || head.next == null) {
+            return false;
+        }
+
+        ListNode slowPointer = head;
+        ListNode fastPointer = head;
+
+        while(fastPointer != null && fastPointer.next != null) {
+            fastPointer = fastPointer.next.next;
+            slowPointer = slowPointer.next;
+
+            if(slowPointer == fastPointer) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    // Removing a loop from a LinkednL
+
+    public ListNode removeALoop() {
+
+        if(head == null || head.next == null) {
+            return head;
+        }
+        ListNode slowPointer = head;
+        ListNode fastPointer  = head;
+
+        while(fastPointer != null && fastPointer.next != null) {
+            slowPointer = slowPointer.next;
+            fastPointer = fastPointer.next.next;
+
+            if(slowPointer == fastPointer) {
+                return removeLoop(head, slowPointer);
+            }
+        }
+
+        return null;
+    }
+
+    public ListNode removeLoop(ListNode head, ListNode slowPointer) {
+        ListNode temp = head;
+
+        while(temp.next != slowPointer.next) {
+            temp = temp.next;
+            slowPointer = slowPointer.next;
+        }
+
+        slowPointer.next = null;
+        return head;
+    } 
+
     public void addTwoNumbers(SinglyLinkedList s1, SinglyLinkedList s2) {
         
     }
@@ -307,21 +449,29 @@ public class SinglyLinkedList {
         sl.head.next = second;
         second.next = third;
         third.next = fourth;
+        // fourth.next = second;
 
-        sl.display();
+        // sl.display();
         // sl.addNodeAtEnd(12);
         // sl.addNodeToBegining(1);
 
         // sl.reverse();
 
         // sl.oddEvenList();
-        // sl.addNumberAtPosN(3, 25);
+        // sl.addNumberAtPosN(5, 25);
+        // sl.addNumberAtPosN(1, 5);
 
         // System.out.println(sl.deleteFirstNode().val);
         // sl.deleteAllElementsWithAValue(1);
         // sl.deleteNodeAtNPosition(4);
-        ListNode ll = new ListNode(4);
-        sl.addNumber(ll);
-        sl.removeduplicates();
+
+        // System.out.println(sl.findNumber(0));
+        // sl.reverseLinked();
+        // System.out.println(sl.findMiddleNode());
+        // System.out.println(sl.findNthLastNode(4).val);
+        // System.out.println(sl.containLoop());
+
+        System.out.println(sl.removeALoop());
+        sl.display();
     }
 }
