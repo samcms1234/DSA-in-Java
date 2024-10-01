@@ -82,6 +82,18 @@ public class DoublyLinkedlist {
         bDisplay();
     }
 
+    public ListNode removeNodeFromTheEnd() {
+        if(isEmpty() || length == 1) {
+            return head;
+        }
+        else {
+            ListNode last = tail;
+            tail = tail.previous;
+            tail.next = null;
+            return last;
+        }
+    }
+
     public static void main(String args[]) {
         DoublyLinkedlist dl = new DoublyLinkedlist();
 
@@ -106,5 +118,6 @@ public class DoublyLinkedlist {
 
         // dl.addNodeAtBegining(9);
         dl.addNodeAtTheEnd(10);
+        dl.removeNodeFromTheEnd();
     }
 }
